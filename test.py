@@ -1,5 +1,2 @@
-import pymongo
-
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-
-mydb = myclient["HealthCareSystem"]
+test = {'yo': 1, 'yoo': 2, 3: 'ml'}
+print(test['yo'])

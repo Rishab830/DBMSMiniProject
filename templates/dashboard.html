@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>MedCare Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            background: #f3f8fc;
+            color: #2d3540;
+        }
+
+        nav {
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav span {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.3em;
+            color: #1959dd;
+            gap: 8px;
+        }
+
+        nav span i {
+            font-size: 1.6em;
+            color: #1389ff;
+        }
+
+        nav div {
+            display: flex;
+            gap: 36px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2d3540;
+            font-size: 1.1em;
+            padding: 12px 14px;
+            border-radius: 25px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav a.active,
+        nav a:hover {
+            background: linear-gradient(92deg, #1389ff, #37c2fa);
+            color: #fff;
+        }
+
+        #container {
+            max-width: 1200px;
+            margin: 34px auto 40px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 28px;
+            padding: 0 20px;
+        }
+
+        #main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        #welcome-section {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(44, 62, 80, 0.06);
+            padding: 28px 40px 12px 40px;
+            text-align: center;
+        }
+
+        #welcome-section h1 {
+            font-size: 2em;
+            margin-bottom: 4px;
+        }
+
+        #date {
+            font-size: 1.1em;
+            color: #5c6e7a;
+            margin-bottom: 12px;
+        }
+
+        #stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        #stats-row>div {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(44, 62, 80, 0.04);
+            padding: 24px;
+            min-width: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+            flex-basis: 130px;
+        }
+
+        #stats-row i {
+            font-size: 2em;
+            color: #1389ff;
+        }
+
+        #stats-row span {
+            font-weight: 700;
+            font-size: 1.7em;
+            color: #1389ff;
+        }
+
+        #cards-group {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #cards-group>div {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 14px rgba(44, 62, 80, 0.06);
+            padding: 36px 38px;
+            flex: 1 1 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 26px;
+            max-width: 450px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-header h2 {
+            font-size: 1.45em;
+            margin: 0;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-header .fa {
+            color: #377dff;
+            font-size: 1.22em;
+        }
+
+        .add-btn {
+            border: 1px solid #dfe5ff;
+            padding: 9px 22px;
+            border-radius: 9px;
+            background: #fff;
+            font-weight: 600;
+            font-size: 1em;
+            color: #2d3540;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .add-btn:hover {
+            background: #f3f8fc;
+        }
+
+        .empty-card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 45px 0;
+            gap: 14px;
+        }
+
+        .empty-card-content .fa {
+            font-size: 3em;
+            color: #bbbfc7;
+        }
+
+        .empty-card-content h3 {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .empty-card-content p {
+            color: #7a859c;
+            font-size: 1.09em;
+            margin: 0 0 14px 0;
+        }
+
+        .main-btn {
+            border: none;
+            color: #fff;
+            background: linear-gradient(92deg, #2186eb, #11cbae);
+            font-size: 1.13em;
+            font-weight: 600;
+            border-radius: 9px;
+            padding: 13px 28px;
+            cursor: pointer;
+            margin-top: 9px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            transition: background 0.17s;
+        }
+
+        .main-btn:hover {
+            background: linear-gradient(92deg, #1462b7, #09927f);
+        }
+
+        #health-insights {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        #health-insights>h2 {
+            color: #db338a;
+            font-size: 1.22em;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .insight-box {
+            border-radius: 15px;
+            background: #fff;
+            box-shadow: 0 1px 7px rgba(44, 62, 80, 0.04);
+            padding: 18px 16px 14px 20px;
+            margin-bottom: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            border-left: 4px solid #e6e9fc;
+        }
+
+        .insight-box.positive {
+            border-color: #b0f1c9;
+            background: #f4fcf6;
+        }
+
+        .insight-box.condition {
+            border-color: #e8c6f7;
+            background: #fbf7fd;
+        }
+
+        .insight-box.variety {
+            border-color: #c6e4fc;
+            background: #f7fafd;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            font-size: 1.07em;
+            margin-bottom: 0;
+        }
+
+        .insight-desc {
+            color: #6c7fa7;
+            font-size: 0.97em;
+            margin: 0;
+        }
+
+        @media (max-width: 900px) {
+            #container {
+                grid-template-columns: 1fr;
+                max-width: 95%;
+            }
+
+            #cards-group {
+                flex-direction: column;
+            }
+
+            #stats-row {
+                justify-content: space-around;
+            }
+        }
+
+        html, body {
+            box-sizing: border-box;
+            /* Prevent any horizontal scroll */
+            width: 100vw;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <span>
+            <i class="fa-solid fa-heart-circle-check"></i> MedCare
+        </span>
+        <div>
+            <a href="#" class="active">
+                <i class="fa-solid fa-table-columns"></i> Dashboard
+            </a>
+            <a href="medications.html"><i class="fa-solid fa-pills"></i> Medications</a>
+            <a href="dietplans.html"><i class="fa-solid fa-utensils"></i> Diet Plans</a>
+            <a href="/profile"><i class="fa-solid fa-user"></i> Profile</a>
+
+        </div>
+    </nav>
+    <div id="container">
+        <div id="main-content">
+            <section id="welcome-section">
+                <h1>Welcome <span id="display-username"></span></h1>
+                <div id="date">Wednesday, September 24th, 2025</div>
+                <div id="stats-row">
+                    <div>
+                        <i class="fa-solid fa-pills"></i>
+                        <div>Active Medications</div>
+                        <span id="active-meds">3</span>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-clock"></i>
+                        <div>Upcoming Reminders</div>
+                        <span id="upcoming-reminders">0</span>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-utensils"></i>
+                        <div>Today's Meals</div>
+                        <span id="todays-meals">0</span>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-heart"></i>
+                        <div>Health Score</div>
+                        <span id="health-score">85%</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cards-group">
+                <div id="reminders-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-clock"></i> Upcoming Reminders</h2>
+                        <button class="add-btn" onclick="location.href='medications.html'">
+                            + Add Med
+                        </button>
+                    </div>
+                    <div class="empty-card-content">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <h3>No upcoming reminders</h3>
+                        <p>Add your medications to get personalized reminders</p>
+                        <button class="main-btn" onclick="location.href='medications.html'">
+                            <i class="fa-solid fa-pills"></i> Add Medication
+                        </button>
+                    </div>
+                </div>
+                <div id="meals-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-utensils"></i> Today's Meals</h2>
+                        <button class="add-btn" onclick="location.href='dietplans.html'">
+                            + Add Meal
+                        </button>
+                    </div>
+                    <div class="empty-card-content">
+                        <i class="fa-solid fa-cheese"></i>
+                        <h3>No meals planned</h3>
+                        <p>Add meals to your diet plan for today</p>
+                        <button class="main-btn" onclick="location.href='dietplans.html'">
+                            <i class="fa-solid fa-plus"></i> Plan Meals
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <aside id="health-insights">
+            <h2><i class="fa fa-heart"></i> Health Insights</h2>
+            <div class="insight-box positive">
+                <p class="insight-title">Great medication tracking!</p>
+                <p class="insight-desc">
+                    You're managing 3 medications actively.
+                </p>
+            </div>
+            <div class="insight-box variety">
+                <p class="insight-title">Balanced meal variety</p>
+                <p class="insight-desc">
+                    You're maintaining a good variety of meals across different times of
+                    day.
+                </p>
+            </div>
+            <div class="insight-box condition">
+                <p class="insight-title">Condition-specific care</p>
+                <p class="insight-desc">
+                    Managing 2 health condition(s) with personalized recommendations.
+                </p>
+            </div>
+        </aside>
+    </div>
+    <script>
+        // You'll need to set username using session or template variable from Flask
+        // Example with Flask Jinja: <span id="display-username">{{ username }}</span>
+        document.getElementById('display-username').textContent = "{{ username }}";
+        document.getElementById('username-field').value = "{{ username }}";
+    </script>
+</body>
+
+</html>

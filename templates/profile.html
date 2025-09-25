@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Health Profile Input</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            background: #f3f8fc;
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            padding-top: 30px;
+            padding-bottom: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #2d3540;
+        }
+
+        h1 {
+            color: #1c274c;
+            font-weight: 800;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        form {
+            background: #fff;
+            padding: 36px 40px;
+            border-radius: 20px;
+            box-shadow: 0 2px 16px rgba(44, 62, 80, 0.07);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 18px 36px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 1em;
+            margin-bottom: 6px;
+            color: #3847a6;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 9px 13px;
+            font-size: 1em;
+            border-radius: 10px;
+            border: 1px solid #d5e1ef;
+            background: #f7fafd;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        textarea {
+            min-height: 60px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        button {
+            grid-column: 1 / -1;
+            background: linear-gradient(100deg, #2385ff 60%, #01ceb6 100%);
+            padding: 15px 0;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.2em;
+            font-weight: 800;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 3px 20px rgba(33, 130, 203, 0.7);
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: linear-gradient(100deg, #1870cc 60%, #019a8f 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Health Profile Input</h1>
+    <form action="/submit_health_data" method="post" id="profileForm">
+        <input type="hidden" name="username" id="username-field">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="Age" min="0" max="120" required />
+
+        <label for="gender">Gender</label>
+        <select id="gender" name="Gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+
+        <label for="height_cm">Height (cm)</label>
+        <input type="number" id="height_cm" name="Height_cm" min="30" max="250" required />
+
+        <label for="weight_kg">Weight (kg)</label>
+        <input type="number" id="weight_kg" name="Weight_kg" min="10" max="500" required />
+
+        <label for="chronic_disease">Chronic Disease</label>
+        <input type="text" id="chronic_disease" name="Chronic_Disease" placeholder="e.g. Diabetes" />
+
+        <label for="bp_systolic">Blood Pressure Systolic (mmHg)</label>
+        <input type="number" id="bp_systolic" name="Blood_Pressure_Systolic" min="50" max="250" />
+
+        <label for="bp_diastolic">Blood Pressure Diastolic (mmHg)</label>
+        <input type="number" id="bp_diastolic" name="Blood_Pressure_Diastolic" min="30" max="150" />
+
+        <label for="cholesterol_level">Cholesterol Level (mg/dL)</label>
+        <input type="number" id="cholesterol_level" name="Cholesterol_Level" min="100" max="400" />
+
+        <label for="blood_sugar_level">Blood Sugar Level (mg/dL)</label>
+        <input type="number" id="blood_sugar_level" name="Blood_Sugar_Level" min="50" max="500" />
+
+        <label for="genetic_risk_factor">Genetic Risk Factor</label>
+        <select id="genetic_risk_factor" name="Genetic_Risk_Factor">
+            <option value="" disabled selected>Select Option</option>
+            <option>None</option>
+            <option>Low</option>
+            <option>Moderate</option>
+            <option>High</option>
+        </select>
+
+        <label for="allergies">Allergies</label>
+        <textarea id="allergies" name="Allergies" placeholder="List any allergies"></textarea>
+
+        <label for="daily_steps">Daily Steps</label>
+        <input type="number" id="daily_steps" name="Daily_Steps" min="0" />
+
+        <label for="exercise_frequency">Exercise Frequency (times per week)</label>
+        <input type="number" id="exercise_frequency" name="Exercise_Frequency" min="0" max="14" />
+
+        <label for="sleep_hours">Sleep Hours (per day)</label>
+        <input type="number" id="sleep_hours" name="Sleep_Hours" min="0" max="24" step="0.1" />
+
+        <label for="alcohol_consumption">Alcohol Consumption (units per week)</label>
+        <input type="number" id="alcohol_consumption" name="Alcohol_Consumption" min="0" />
+
+        <label for="smoking_habit">Smoking Habit</label>
+        <select id="smoking_habit" name="Smoking_Habit">
+            <option value="" disabled selected>Select Option</option>
+            <option>None</option>
+            <option>Occasional</option>
+            <option>Regular</option>
+        </select>
+
+        <label for="dietary_habits">Dietary Habits</label>
+        <textarea id="dietary_habits" name="Dietary_Habits" placeholder="Describe your dietary habits"></textarea>
+
+        <label for="caloric_intake">Caloric Intake (kcal per day)</label>
+        <input type="number" id="caloric_intake" name="Caloric_Intake" min="0" />
+
+        <label for="protein_intake">Protein Intake (g per day)</label>
+        <input type="number" id="protein_intake" name="Protein_Intake" min="0" />
+
+        <label for="carbohydrate_intake">Carbohydrate Intake (g per day)</label>
+        <input type="number" id="carbohydrate_intake" name="Carbohydrate_Intake" min="0" />
+
+        <label for="fat_intake">Fat Intake (g per day)</label>
+        <input type="number" id="fat_intake" name="Fat_Intake" min="0" />
+
+        <label for="preferred_cuisine">Preferred Cuisine</label>
+        <input type="text" id="preferred_cuisine" name="Preferred_Cuisine" />
+
+        <label for="food_aversions">Food Aversions</label>
+        <textarea id="food_aversions" name="Food_Aversions" placeholder="List any food aversions"></textarea>
+
+        <button type="submit">Submit Profile</button>
+    </form>
+</body>
+
+</html>
