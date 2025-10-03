@@ -326,7 +326,7 @@
             </a>
             <a href="medications.html"><i class="fa-solid fa-pills"></i> Medications</a>
             <a href="dietplans.html"><i class="fa-solid fa-utensils"></i> Diet Plans</a>
-            <a href="/profile"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="{{ url_for('profile', id=id )}}"><i class="fa-solid fa-user"></i> Profile</a>
 
         </div>
     </nav>
@@ -334,7 +334,7 @@
         <div id="main-content">
             <section id="welcome-section">
                 <h1>Welcome <span id="display-username"></span></h1>
-                <div id="date">Wednesday, September 24th, 2025</div>
+                <div id="date"></div>
                 <div id="stats-row">
                     <div>
                         <i class="fa-solid fa-pills"></i>
@@ -422,7 +422,8 @@
         // You'll need to set username using session or template variable from Flask
         // Example with Flask Jinja: <span id="display-username">{{ username }}</span>
         document.getElementById('display-username').textContent = "{{ username }}";
-        document.getElementById('username-field').value = "{{ username }}";
+        var now = new Date()
+        document.getElementById('date').innerHTML = now.toDateString()
     </script>
 </body>
 

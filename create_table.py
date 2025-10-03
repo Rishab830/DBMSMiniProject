@@ -54,11 +54,11 @@ lifestyle_collection = db["Lifestyle"]
 dietary_information_collection = db["Dietary_Information"]
 recommendations_collection = db["Recommendations"]
 
-# patient
-# medical_information
-# lifestyle
-# dietary_information
-# recommendations
+patient_collection.create_index('Patient_ID', unique=True)
+medical_information_collection.create_index('Patient_ID', unique=True)
+lifestyle_collection.create_index('Patient_ID', unique=True)
+dietary_information_collection.create_index('Patient_ID', unique=True)
+recommendations_collection.create_index('Patient_ID', unique=True)
 
 patient_collection.insert_many(patient_data)
 medical_information_collection.insert_many(medical_information_data)

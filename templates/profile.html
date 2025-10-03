@@ -90,7 +90,7 @@
 
 <body>
     <h1>Health Profile Input</h1>
-    <form action="/submit_health_data" method="post" id="profileForm">
+    <form action="{{ '/submit_health_data' if patient else '/update_health_data' }}" method="post" id="profileForm">
         <input type="hidden" name="username" id="username-field">
         <label for="age">Age</label>
         <input type="number" id="age" name="Age" min="0" max="120" required />

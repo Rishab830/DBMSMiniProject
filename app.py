@@ -17,7 +17,7 @@ def login():
     password = request.form.get('password')
     user = user_table.find_one({"username": username, "password": password})
     if user:
-        return render_template('dashboard.html', username=username)
+        return render_template('dashboard.html', id=user['Patient_ID'], username=username)
     else:
         return render_template('login.html', login_error='incorrect credentials')
     
@@ -32,13 +32,18 @@ def register():
     password = request.form.get('password')
     if user_table.find_one({"username": username}):
         return render_template("signup.html", signin_error="Username already exists")
-    patient_id = f'{db.Patient.count_documents({}) + 1}'
+    patient_id = f'P0{db.Patient.count_documents({}) + 1}'
     user_table.insert_one({"Patient_ID": patient_id, "username": username, "email": email, "password": password})
     return render_template('login.html')
 
 @app.route('/profile', methods=['POST', 'GET'])
 def profile():
-    return render_template('profile.html')
+    id = request.args['id']
+    patient = db['Patient'].find_one({'Patient_ID': id})
+    if patient:
+        return render_template('profile.html', patient=patient)
+    else:
+        return render_template('profile.html', patient=None)
 
 @app.route('/submit_health_data', methods=['POST'])
 def submit_health_data():
