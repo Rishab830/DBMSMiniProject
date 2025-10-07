@@ -1,43 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/style.css">
-    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <title>Login Form</title>
+    <title>Login - HealthSync</title>
+    <link rel="stylesheet" href=../static/style.css>
 </head>
+
 <body>
-    <div class="login">
-        <div class="login__content">
-            <div class="login__welcome-box">
-                <h1>Welcome!</h1>
-                <p>Your Health,Our Priority</p>
-            </div>
-            <div class="login__forms">
-                <form action="/login" method="post" id="login-in">
-                    <h1 class="login__title">Sign In</h1>
-                    <div class="login__box">
-                        <i class='bx bx-user login__icon'></i>
-                        <input type="text" name="username" placeholder="Username" class="login__input">
+    <header>
+        <div class="container">
+            <div class="logo" onclick="window.location.href='/'">💙 HealthSync</div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/login_first" class="active">Login</a></li>
+                    <li><a href="/signup">Signup</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h2>Welcome Back</h2>
+                <p class="auth-subtitle">Login to access your health dashboard</p>
+
+                <form id="loginForm" class="auth-form" action="/login" method="post">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
                     </div>
-                    <div class="login__box">
-                        <i class='bx bx-lock-alt login__icon'></i>
-                        <input type="password" name="password" placeholder="Password" class="login__input">
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" required>
+                            <button type="button" id="toggle-password" class="toggle-password" onclick="togglePassword('password')">👁️</button>
+                        </div>
                     </div>
-                    <span id="login_error" style="color: red;"></span>
-                    <button type="submit" class="login__button" id="signin-btn">Sign In</button>
-                    <div>
-                        <span class="login__account">Don't have an Account?</span>
-                        <a href="/signup" class="login__signin">Sign Up</a>
+
+                    <div class="form-links">
+                        <a href="#" class="link">Forgot Password?</a>
                     </div>
+                    
+                    <span id="login_error" name="login_error" style="color: red;">{{ login_error }}</span>
+
+                    <button type="submit" class="btn-primary">Login</button>
+
+                    <p class="auth-footer">
+                        Don't have an account? <a href="/signup" class="link">Create Account</a>
+                    </p>
                 </form>
             </div>
         </div>
-    </div>
-    <script>
-        login_error = document.getElementById('login_error');
-        login_error.textContent = "{{ login_error }}";
-    </script>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 HealthSync. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/js.js"></script>
 </body>
+
 </html>

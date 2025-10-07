@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Plans - HealthSync</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">💙 HealthSync</div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('dashboard', user_id=user_id) }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('medication', user_id=user_id) }}">Medications</a></li>
+                    <li><a href="{{ url_for('diet_plan', user_id=user_id) }}" class="active">Diet Plans</a></li>
+                    <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
+                    {% if session.admin == True %}
+                    <li><a href="{{ url_for('admin')}}">Admin</a></li>
+                    {% endif %}
+                    <li><a href="/" class="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Personalized Diet Plans</h1>
+                <p class="page-subtitle" style="color: white;">AI-generated meal plans based on your health profile</p>
+            </div>
+
+            <div class="diet-summary">
+                <div class="summary-card">
+                    <h3>Today's Target</h3>
+                    <p><strong>Calories:</strong> 2000 kcal</p>
+                    <p><strong>Protein:</strong> 80g</p>
+                    <p><strong>Carbs:</strong> 250g</p>
+                    <p><strong>Fats:</strong> 65g</p>
+                </div>
+            </div>
+
+            <div class="meals-section">
+                <h2>Today's Meal Plan</h2>
+                <div class="meals-grid">
+                    <div class="meal-card">
+                        <div class="meal-icon">🌅</div>
+                        <h3>Breakfast</h3>
+                        <div class="meal-time">7:00 AM - 9:00 AM</div>
+                        <div class="meal-items">
+                            <p><strong>Oatmeal with Berries</strong></p>
+                            <ul>
+                                <li>1 cup rolled oats</li>
+                                <li>1/2 cup mixed berries</li>
+                                <li>1 tbsp honey</li>
+                                <li>1 tbsp almond butter</li>
+                            </ul>
+                        </div>
+                        <div class="meal-nutrition">
+                            <span class="nutrition-badge">420 kcal</span>
+                            <span class="nutrition-badge">12g protein</span>
+                            <span class="nutrition-badge">65g carbs</span>
+                            <span class="nutrition-badge">14g fat</span>
+                        </div>
+                    </div>
+
+                    <div class="meal-card">
+                        <div class="meal-icon">☀️</div>
+                        <h3>Lunch</h3>
+                        <div class="meal-time">12:00 PM - 2:00 PM</div>
+                        <div class="meal-items">
+                            <p><strong>Grilled Chicken Salad</strong></p>
+                            <ul>
+                                <li>150g grilled chicken breast</li>
+                                <li>Mixed greens and vegetables</li>
+                                <li>Olive oil dressing</li>
+                                <li>1 whole grain roll</li>
+                            </ul>
+                        </div>
+                        <div class="meal-nutrition">
+                            <span class="nutrition-badge">550 kcal</span>
+                            <span class="nutrition-badge">45g protein</span>
+                            <span class="nutrition-badge">48g carbs</span>
+                            <span class="nutrition-badge">18g fat</span>
+                        </div>
+                    </div>
+
+                    <div class="meal-card">
+                        <div class="meal-icon">🌙</div>
+                        <h3>Dinner</h3>
+                        <div class="meal-time">6:00 PM - 8:00 PM</div>
+                        <div class="meal-items">
+                            <p><strong>Baked Salmon with Quinoa</strong></p>
+                            <ul>
+                                <li>150g baked salmon</li>
+                                <li>1 cup cooked quinoa</li>
+                                <li>Steamed broccoli</li>
+                                <li>Lemon herb seasoning</li>
+                            </ul>
+                        </div>
+                        <div class="meal-nutrition">
+                            <span class="nutrition-badge">620 kcal</span>
+                            <span class="nutrition-badge">48g protein</span>
+                            <span class="nutrition-badge">52g carbs</span>
+                            <span class="nutrition-badge">24g fat</span>
+                        </div>
+                    </div>
+
+                    <div class="meal-card">
+                        <div class="meal-icon">🍎</div>
+                        <h3>Snacks</h3>
+                        <div class="meal-time">Throughout the day</div>
+                        <div class="meal-items">
+                            <p><strong>Healthy Snack Options</strong></p>
+                            <ul>
+                                <li>Greek yogurt with nuts</li>
+                                <li>Apple with peanut butter</li>
+                                <li>Handful of almonds</li>
+                                <li>Protein smoothie</li>
+                            </ul>
+                        </div>
+                        <div class="meal-nutrition">
+                            <span class="nutrition-badge">410 kcal</span>
+                            <span class="nutrition-badge">18g protein</span>
+                            <span class="nutrition-badge">42g carbs</span>
+                            <span class="nutrition-badge">20g fat</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 HealthSync. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src=C:\Users\madhu\OneDrive\Documents\DBMS\website_dbms\js.js></script>
+</body>
+
+</html>

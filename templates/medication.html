@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medications - HealthSync</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">💙 HealthSync</div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('dashboard', user_id=user_id) }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('medication', user_id=user_id) }}" class="active">Medications</a></li>
+                    <li><a href="{{ url_for('diet_plan', user_id=user_id) }}">Diet Plans</a></li>
+                    <li><a href="{{ url_for('profile', user_id=user_id) }}">Profile</a></li>
+                    {% if session.admin == True %}
+                    <li><a href="{{ url_for('admin')}}">Admin</a></li>
+                    {% endif %}
+                    <li><a href="/" class="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>My Medications</h1>
+                <a href="{{ url_for('add_medication', user_id=user_id) }}"><button class="btn-primary">+ Add Medication</button></a>
+            </div>
+            
+            <div class="medications-grid" id="medicationsList">
+                {% for medication in medications %}
+                <div class="med-card">
+                    <div class="med-header">
+                        <h3>{{ medication.medName }}</h3>
+                        <span class="med-dosage">{{ medication.medDosage }}</span>
+                    </div>
+                    <div class="med-details">
+                        <p><strong>Frequency:</strong>{{ medication.medFrequency }}</p>
+                        <p><strong>Time:</strong>{{medication.medTime}}</p>
+                        <p><strong>Duration:</strong>{{ medication.medDuration }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 HealthSync. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src=C:\Users\madhu\OneDrive\Documents\DBMS\website_dbms\js.js></script>
+</body>
+
+</html>

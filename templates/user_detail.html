@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details - HealthSync</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">💙 HealthSync</div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('dashboard', user_id=data.Patient_ID) }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('medication', user_id=data.Patient_ID) }}">Medications</a></li>
+                    <li><a href="{{ url_for('diet_plan', user_id=data.Patient_ID) }}">Diet Plans</a></li>
+                    <li><a href="{{ url_for('profile', user_id=data.Patient_ID) }}">Profile</a></li>
+                    {% if session.admin == True %}
+                    <li><a href="{{ url_for('admin')}}">Admin</a></li>
+                    {% endif %}
+                    <li><a href="/" class="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="form-page">
+        <div class="container">
+            <div class="form-card">
+                <h2>Complete Your Health Profile</h2>
+                <p class="form-subtitle">Help us personalize your health experience</p>
+
+                <form id="userDetailsForm" class="details-form" action="{{ url_for('submit_health_data', user_id=data.Patient_ID)}}" method="post">
+                    <div class="form-section">
+                        <h3>Basic Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Age">Age</label>
+                                <input type="number" id="Age" name="Age" min="1" max="120" required value="{{ data.Age }}">
+                                <small style="color: #666; font-size: 0.85em;">Range: 1-120 years</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Gender">Gender</label>
+                                <select id="Gender" name="Gender" required>
+                                    <option value="">Select</option>
+                                    <option value="Male" {% if data.Gender == "Male" %} selected {% endif %}>Male</option>
+                                    <option value="Female" {% if data.Gender == "Female" %} selected {% endif %}>Female</option>
+                                    <option value="Other" {% if data.Gender == "Other" %} selected {% endif %}>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Height_cm">Height (cm)</label>
+                                <input type="number" id="Height_cm" name="Height_cm" min="50" max="250" step="0.1" required value="{{ data.Height_cm }}">
+                                <small style="color: #666; font-size: 0.85em;">Range: 50-250 cm</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Weight_kg">Weight (kg)</label>
+                                <input type="number" id="Weight_kg" name="Weight_kg" min="20" max="300" step="0.1" required value="{{ data.Weight_kg }}">
+                                <small style="color: #666; font-size: 0.85em;">Range: 20-300 kg</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Medical Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Chronic_Disease">Chronic Disease</label>
+                                <select name="Chronic_Disease" id="Chronic_Disease">
+                                    <option value="">None</option>
+                                    <option value="Diabetes" {% if data.Chronic_Disease == "Diabetes" %} selected {% endif %}>Diabetes</option>
+                                    <option value="Heart Disease"{% if data.Chronic_Disease == "Heart_Disease" %} selected {% endif %}>Heart Disease</option>
+                                    <option value="Hypertension"{% if data.Chronic_Disease == "Hypertension" %} selected {% endif %}>Hypertension</option>
+                                    <option value="Obesity"{% if data.Chronic_Disease == "Obesity" %} selected {% endif %}>Obesity</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Allergies">Allergies</label>
+                                <select name="Allergies" id="Allergies">
+                                    <option value="">None</option>
+                                    <option value="Gluten Intolerance" {% if data.Allergies == "Gluten Intolerance" %} selected {% endif %}>Gluten Intolerance</option>
+                                    <option value="Lactose Intolerance" {% if data.Allergies == "Lactose Intolerance" %} selected {% endif %}>Lactose Intolerance</option>
+                                    <option value="Nut Allergy" {% if data.Allergies == "Nut Allergy" %} selected {% endif %}>Nut Allergy</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Blood_Pressure_Systolic">Blood Pressure (Systolic)</label>
+                                <input type="number" id="Blood_Pressure_Systolic" name="Blood_Pressure_Systolic" min="60" max="250" value="{{ data.Blood_Pressure_Systolic }}">
+                                <small style="color: #666; font-size: 0.85em;">Normal: 90-120 mm Hg</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Blood_Pressure_Diastolic">Blood Pressure (Diastolic)</label>
+                                <input type="number" id="Blood_Pressure_Diastolic" name="Blood_Pressure_Diastolic" min="40" max="150" value="{{ data.Blood_Pressure_Diastolic }}">
+                                <small style="color: #666; font-size: 0.85em;">Normal: 60-80 mm Hg</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Cholesterol_Level">Cholesterol Level (mg/dL)</label>
+                                <input type="number" id="Cholesterol_Level" name="Cholesterol_Level" min="100" max="500" value="{{ data.Cholesterol_Level }}">
+                                <small style="color: #666; font-size: 0.85em;">Normal: Below 200 mg/dL</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Blood_Sugar_Level">Blood Sugar Level (mg/dL)</label>
+                                <input type="number" id="Blood_Sugar_Level" name="Blood_Sugar_Level" min="50" max="500" value="{{ data.Blood_Sugar_Level }}">
+                                <small style="color: #666; font-size: 0.85em;">Fasting normal: 70-100 mg/dL</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Genetic_Risk_Factor">Genetic Risk Factor</label>
+                                <select id="Genetic_Risk_Factor" name="Genetic_Risk_Factor" required>
+                                    <option value="">Select</option>
+                                    <option value="Yes" {% if data.Genetic_Risk_Factor == "Yes" %} selected {% endif %}>Yes</option>
+                                    <option value="No" {% if data.Genetic_Risk_Factor == "No" %} selected {% endif %}>No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Lifestyle Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Daily_Steps">Daily Steps</label>
+                                <input type="number" id="Daily_Steps" name="Daily_Steps" min="0" max="50000" value="{{ data.Daily_Steps }}">
+                                <small style="color: #666; font-size: 0.85em;">Target: 8,000-10,000 steps</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Exercise_Frequency">Exercise Frequency (per week)</label>
+                                <input type="number" id="Exercise_Frequency" name="Exercise_Frequency" min="0" max="14" value="{{ data.Exercise_Frequency }}">
+                                <small style="color: #666; font-size: 0.85em;">Range: 0-14 times/week</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Sleep_Hours">Sleep Hours (per night)</label>
+                                <input type="number" step="0.5" id="Sleep_Hours" name="Sleep_Hours" min="0" max="24" value="{{ data.Sleep_Hours }}">
+                                <small style="color: #666; font-size: 0.85em;">Recommended: 7-9 hours</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Alcohol_Consumption">Alcohol Consumption</label>
+                                <select id="Alcohol_Consumption" name="Alcohol_Consumption">
+                                    <option value="">Select</option>
+                                    <option value="No" {% if data.Alcohol_Consumption == "No" %} selected {% endif %}>No</option>
+                                    <option value="Yes" {% if data.Alcohol_Consumption == "Yes" %} selected {% endif %}>Yes</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Smoking_Habit">Smoking Habit</label>
+                                <select id="Smoking_Habit" name="Smoking_Habit">
+                                    <option value="">Select</option>
+                                    <option value="Yes" {% if data.Smoking_Habit == "Yes" %} selected {% endif %}>Yes</option>
+                                    <option value="No" {% if data.Smoking_Habit == "No" %} selected {% endif %}>No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Dietary Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Dietary_Habits">Dietary Habits</label>
+                                <select id="Dietary_Habits" name="Dietary_Habits">
+                                    <option value="Regular" {% if data.Dietary_Habits == "Regular" %} selected {% endif %}>Regular</option>
+                                    <option value="Keto" {% if data.Dietary_Habits == "Keto" %} selected {% endif %}>Keto</option>
+                                    <option value="Vegan" {% if data.Dietary_Habits == "Vegan" %} selected {% endif %}>Vegan</option>
+                                    <option value="Vegetarian" {% if data.Dietary_Habits == "Vegetarian" %} selected {% endif %}>Vegetarian</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Caloric_Intake">Daily Caloric Intake</label>
+                                <input type="number" id="Caloric_Intake" name="Caloric_Intake" min="1000" max="5000" value="{{ data.Caloric_Intake }}">
+                                <small style="color: #666; font-size: 0.85em;">Range: 1,000-5,000 calories</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Protein_Intake">Protein Intake (g/day)</label>
+                                <input type="number" id="Protein_Intake" name="Protein_Intake" min="10" max="300" value="{{ data.Protein_Intake }}">
+                                <small style="color: #666; font-size: 0.85em;">Range: 10-300 g/day</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Carbohydrate_Intake">Carbohydrate Intake (g/day)</label>
+                                <input type="number" id="Carbohydrate_Intake" name="Carbohydrate_Intake" min="50" max="500" value="{{ data.Carbohydrate_Intake }}">
+                                <small style="color: #666; font-size: 0.85em;">Range: 50-500 g/day</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="Fat_Intake">Fat Intake (g/day)</label>
+                                <input type="number" id="Fat_Intake" name="Fat_Intake" min="20" max="200" value="{{ data.Fat_Intake }}">
+                                <small style="color: #666; font-size: 0.85em;">Range: 20-200 g/day</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="Preferred_Cuisine">Preferred Cuisine</label>
+                                <select name="Preferred_Cuisine" id="Preferred_Cuisine">
+                                    <option value="Asian" {% if data.Preferred_Cuisine == "Asian" %} selected {% endif %}>Asian</option>
+                                    <option value="Indian" {% if data.Preferred_Cuisine == "Indian" %} selected {% endif %}>Indian</option>
+                                    <option value="Mediterranean" {% if data.Preferred_Cuisine == "Mediterranean" %} selected {% endif %}>Mediterranean</option>
+                                    <option value="Western" {% if data.Preferred_Cuisine == "Western" %} selected {% endif %}>Western</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Food_Aversions">Food Aversions</label>
+                                <select name="Food_Aversions" id="Food_Aversions">
+                                    <option value="">None</option>
+                                    <option value="Salty" {% if data.Food_Aversions == "Salty" %} selected {% endif %}>Salty</option>
+                                    <option value="Spicy" {% if data.Food_Aversions == "Spicy" %} selected {% endif %}>Spicy</option>
+                                    <option value="Sweet" {% if data.Food_Aversions == "Sweet" %} selected {% endif %}>Sweet</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Save Details</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 HealthSync. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

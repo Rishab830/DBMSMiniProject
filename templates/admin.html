@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - HealthSync</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo" onclick="window.location.href='/'">💙 HealthSync</div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/admin" class="active">Admin</a></li>
+                    <li><a href="/" class="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Admin Dashboard</h1>
+                <p class="page-subtitle" style="color: white;">Manage registered users and their health data</p>
+            </div>
+
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3>{{ user_count }}</h3>
+                    <p>Total Users</p>
+                </div>
+                <div class="stat-card">
+                    <h3>{{ medication_count }}</h3>
+                    <p>Active Medications</p>
+                </div>
+                <div class="stat-card">
+                    <h3>89%</h3>
+                    <p>Avg Health Score</p>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <h2>Registered Users</h2>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>BMI</th>
+                            <th>Chronic Disease</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.Patient_ID }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.Age }}</td>
+                            <td>{{ user.Gender }}</td>
+                            <td>{{ user.BMI }}</td>
+                            <td>{{ user.Chronic_Disease }}</td>
+                            <td>
+                                <a href="{{ url_for('user_detail', user_id=user.Patient_ID, admin=True) }}"><button class="btn-edit">Edit</button></a>
+                                <a href="{{ url_for('delete_user', user_id=user.Patient_ID) }}"><button class="btn-delete">Delete</button></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 HealthSync. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src=C:\Users\madhu\OneDrive\Documents\DBMS\website_dbms\js.jss></script>
+</body>
+
+</html>

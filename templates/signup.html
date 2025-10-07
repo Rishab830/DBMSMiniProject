@@ -1,47 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/style.css">
-    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <title>Sign Up</title>
+    <title>Sign Up - HealthSync</title>
+    <link rel="stylesheet" href=../static/style.css>
 </head>
+
 <body>
-    <div class="login">
-        <div class="login__content">
-            <div class="login__welcome-box">
-                <h1>Welcome!</h1>
-                <p>Your Health,Our Priority</p>
-            </div>
-            <div class="login__forms">
-                <form action="/register" method="post" class="login__create" id="login-up">
-                    <h1 class="login__title">Create Account</h1>
-                    <div class="login__box">
-                        <i class='bx bx-user login__icon'></i>
-                        <input type="text" name="username" placeholder="Username" class="login__input">
+    <header>
+        <div class="container">
+            <div class="logo" onclick="window.location.href='/'">💙 HealthSync</div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/login_first">Login</a></li>
+                    <li><a href="/signup" class="active">Signup</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h2>Create Account</h2>
+                <p class="auth-subtitle">Join HealthSync to start your health journey</p>
+
+                <form id="signupForm" class="auth-form" action="/register" method="post">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" autocomplete="username" required>
                     </div>
-                    <div class="login__box">
-                        <i class='bx bx-at login__icon'></i>
-                        <input type="text" name="email" placeholder="Email" class="login__input">
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" autocomplete="email" required>
                     </div>
-                    <div class="login__box">
-                        <i class='bx bx-lock-alt login__icon'></i>
-                        <input type="password" name="password" placeholder="Password" class="login__input">
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" autocomplete="new-password" required minlength="8">
+                            <button type="button" id="toggle-password" class="toggle-password" onclick="togglePassword('password')">👁️</button>
+                        </div>
+                        <small style="color: #666; font-size: 0.85em;">Minimum 8 characters</small>
                     </div>
-                    <span id="signin_error" style="color: red;"></span>
-                    <button type="submit" class="login__button" id="signup-btn">Sign Up</button>
-                    <div>
-                        <span class="login__account">Already have an Account?</span>
-                        <a href="/login_first" class="login__signup">Sign In</a>
+
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <div class="password-input">
+                            <input type="password" id="confirm_password" name="confirm_password" autocomplete="new-password" required>
+                            <button type="button" id="toggle-confirm_password" class="toggle-password" onclick="togglePassword('confirm_password')">👁️</button>
+                        </div>
                     </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label style="display: flex; align-items: center; font-size: 0.9em; cursor: pointer;">
+                            <input type="checkbox" name="terms" required style="margin-right: 8px;">
+                            I agree to the <a href="#" class="link" style="margin-left: 4px;">Terms & Conditions</a>
+                        </label>
+                    </div>
+
+                    <span id="signup_error" name="signup_error" style="color: red;">{{ signup_error }}</span>
+
+                    <button type="submit" class="btn-primary">Create Account</button>
+
+                    <p class="auth-footer">
+                        Already have an account? <a href="/login_first" class="link">Login</a>
+                    </p>
                 </form>
             </div>
         </div>
-    </div>
-    <script>
-        signin_error = document.getElementById('signin_error');
-        signin_error.textContent = "{{ signin_error }}";
-    </script>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 HealthSync. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/js.js"></script>
+</invoke>
 </body>
+
 </html>
