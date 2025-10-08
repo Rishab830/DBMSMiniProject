@@ -18,7 +18,7 @@
                     <li><a href="{{ url_for('medication', user_id=data.Patient_ID) }}">Medications</a></li>
                     <li><a href="{{ url_for('diet_plan', user_id=data.Patient_ID) }}">Diet Plans</a></li>
                     <li><a href="{{ url_for('profile', user_id=data.Patient_ID) }}" class="active">Profile</a></li>
-                    {% if admin == "True" %}
+                    {% if session.admin == True %}
                     <li><a href="{{ url_for('admin')}}">Admin</a></li>
                     {% endif %}
                     <li><a href="/" class="logout-btn">Logout</a></li>
